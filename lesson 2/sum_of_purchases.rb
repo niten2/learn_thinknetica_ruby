@@ -8,21 +8,19 @@
   final_sum = 0
 
 loop do
-  puts "Введите название товара"
+  puts "Введите название товара или stop для выхода"
   name    = gets.chomp
-  break if name == "Стоп" || name == "стоп"
+  break if name.downcase == "stop"
 
   puts "Введите цену товара"
   cost    = gets.chomp.to_f
 
   puts "Введите количество товара"
   count   = gets.chomp.to_f
+
   sum = cost * count
-
   basket[name] = { cost => count }
-
-  basket.each_value {|key| key.each { |key, value| sum_each = key * value } }
-  final_sum += sum_each
+  final_sum += sum
 
   puts "Сумма за текущий товар = #{sum}"
   puts "Хэш содержит #{basket}"
@@ -30,5 +28,6 @@ loop do
 end
 
 
-
+# basket.each_value {|key| key.each { |key, value| sum_each = key * value } }
+  # final_sum += sum_each
 
