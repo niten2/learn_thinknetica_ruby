@@ -7,56 +7,16 @@ train_2 = Train.new(0, 1188)
 train_3 = Train.new(0, 1288)
 station_1 = RailwayStation.new("Moscow")
 
-# puts "ПОЕЗДА"
-# train_1.list
-
 puts "СТАНЦИИ"
 station_1.list
 station_1.list_type
 
-# station_1.list_type
 station_1.take_train(train_1.list)
 station_1.take_train(train_2.list)
 station_1.take_train(train_3.list)
 
 station_1.list
 station_1.list_type
-# station_1.list_type
-# station_1.send_train(train_1.list)
-# station_1.list
-
-# station_1.take_train
-# station_1.take_train(train_1.list)
-# station_1.take_train(train_2.list)
-# station_1.take_train(train_3.list)
-# station_1.take_train(train_4.list)
-# station_1.list
-# station_1.list_type
-# station_1.send_train(train_4.list)
-# station_1.list_type
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
