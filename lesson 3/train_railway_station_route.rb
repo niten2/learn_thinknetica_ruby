@@ -23,24 +23,39 @@
 # Перемещаться между станциями, указанными в маршруте.
 # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
 
+def more_zero?(speed)
+  if speed > 0
+    true
+  else
+    false
+  end
+end
+
+def count_hash_dublicate(hash, value)
+  count = 0
+  hash.values.each do |t|
+    if t == value
+      count += 1
+    end
+  end
+  return count
+end
+
 class Train
 
 	attr_accessor :speed, :wagon, :type, :route, :station
 
 	def initialize(type, number)
-
-		if type == 1
+    if type == 1
 			@type = "freight"
 		else
 			@type = "passenger"
 		end
 
-		# @number = rand(1..100)
 		@number = number
+    @train = {number => @type}
 		@speed = 0
 		@wagon = 0
-		@route = nil
-		@now = nil
 		puts "Собран новый поезд №#{@number}, типа #{@type}"
 	end
 
@@ -54,28 +69,24 @@ class Train
 
 	def speed_up
 		@speed += 20
-		if @speed == 0
+		if @speed.zero?
 			puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
-		else @speed > 0
+		else more_zero?(@speed)
 			puts "Поезд №#{@number} ускорился на 20 км/ч, теперь его скорость составляет #{@speed}"
 		end
 	end
 
 	def stop
-		if @speed > 0
+		if more_zero?(@speed)
 			@speed = 0
 			puts "Поезд №#{@number} остановлен"
 		else
-			@speed = 0
 			puts "Поезд №#{@number} уже стоит"
 		end
 	end
 
-	# def list_wagon
-	# end
-
 	def add_wagon
-		if @speed == 0
+		if @speed.zero?
 			@wagon += 1
 			puts "Поезду №#{@number} добавлен новый вагон, теперь у него вагонов #{@wagon} шт."
 		else
@@ -84,7 +95,7 @@ class Train
 	end
 
 	def delete_wagon
-		if @speed == 0
+		if @speed.zero?
 			@wagon -= 1
 			puts "От поезда №#{@number} отцеплен вагон"
 		else
@@ -92,10 +103,8 @@ class Train
 		end
 	end
 
-
 	def take_route(station)
 		@station = station
-    # @station = route.first
     puts "Поезд №#{@number} готов ехать с станции #{@station.first} на станцию #{@station.last}"
 	end
 
@@ -109,7 +118,7 @@ class Train
   end
 
   def list
-    return {type: @type, number: @number}
+    return {@number => @type}
   end
 
 end
@@ -117,35 +126,37 @@ end
 class RailwayStation
 	def initialize(name)
 		@name = name
-		@trains = []
+		@trains = {}
 		puts "Станция #{@name} создана"
 	end
 
-
-
 	def list
-		# puts @train
-		@trains.each_with_index { |train, index| puts "На станции есть #{index + 1}. #{train[:type]}, #{train[:number]} поезд"}
+		puts "На станции сейчас #{@trains.length} поездов"
 	end
 
 	def list_type
-    puts "На станции поездов типа Freight: #{(@trains.select {|train| train[:type] == "freight"}).size}"
-    puts "На станции поездов типа Passenger: #{(@trains.select {|train| train[:type] == "passenger"}).size}"
+    puts "На станции поездов типа Freight: #{count_hash_dublicate(@trains, "freight")}"
+    puts "На станции поездов типа Passenger: #{count_hash_dublicate(@trains, "passenger")}"
 	end
 
 	def take_train(train = {})
-		if train[:type].nil? || train[:number].nil?
+    @number = train.keys.join
+    @type   = train.values.join
+		if @number.nil? || @type.nil?
 			puts "Невозможно принять такой поезд"
 		else
-			@trains << {type: train[:type], number: train[:number]}
-			puts "Поезд с номером #{train[:number]} и типом #{train[:type]} принят на станцию"
+			# @trains << {@number => @type}
+      @trains[@number] = @type
+			puts "Поезд с номером #{@number} и типом #{@type} принят на станцию"
 		end
 	end
 
 	def send_train(train = {})
-    if @trains.include?({ type: train[:type], number: train[:number] })
-      @trains.delete({ type: train[:type], number: train[:number] })
-      puts "Поезд Номер: #{train[:number]} покинул станцию"
+    @number = train.keys.join
+    @type   = train.values.join
+    if @trains.include?({@number => @type})
+      @trains.delete({@number => @type})
+      puts "Поезд Номер: #{@number} покинул станцию"
     else
       puts "На станции нет такого поезда"
     end
@@ -153,7 +164,6 @@ class RailwayStation
 end
 
 class Route
-
 	attr_accessor :route
 
 	def initialize(stations = [])
@@ -202,6 +212,4 @@ class Route
   end
 
 end
-
-# end
 
