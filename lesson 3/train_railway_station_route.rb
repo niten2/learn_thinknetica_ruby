@@ -30,11 +30,7 @@ class Train
 	attr_accessor :speed, :wagon, :type, :route, :station
 
 	def initialize(number, type)
-    if type == :freight
-			@type = "freight"
-		else
-			@type = "passenger"
-		end
+    @type = type
 		@number = number
     @train = {number => @type}
 		@speed = 0

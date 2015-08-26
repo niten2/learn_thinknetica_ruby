@@ -1,15 +1,55 @@
 require_relative "./train.rb"
-require_relative "./cargo_train.rb"
-require_relative "./passanger_train.rb"
+require_relative "./train_cargo.rb"
+require_relative "./train_passenger.rb"
 
 require_relative "./railway_station.rb"
 require_relative "./route.rb"
+
+require_relative "./wagon.rb"
+require_relative "./wagon_cargo.rb"
+require_relative "./wagon_passenger.rb"
 
 
 
 puts "\n"
 puts "****************" + " " + "СОЗДАНИЕ" + " " + "****************"
 puts "\n"
+
+
+wagon_1 = WagonCargo.new(1)
+wagon_2 = WagonCargo.new(2)
+wagon_3 = WagonPassenger.new(22)
+
+wagon_1.type
+wagon_2.type
+
+
+
+train_1 = TrainCargo.new(88)
+train_2 = TrainPassenger.new(8811)
+
+
+# p wagon_1.such?
+# p train_1.class
+
+# train_1.add_wagon(wagon_1)
+# train_1.speed_up
+train_1.add_wagon(wagon_1)
+train_1.add_wagon(wagon_2)
+train_1.list_wagon
+
+train_1.list_wagon
+
+train_1.delete_wagon
+
+train_1.list_wagon
+
+# train_2.add_wagon(wagon_2)
+# wagon_2.list
+
+
+
+
 
 # train_1 = Train.new(88, :freight)
 # train_2 = Train.new(90, :freight)
@@ -27,8 +67,7 @@ puts "\n"
 puts "\n"
 puts "****************" + " " + "ПОЕЗДА" + " " + "****************"
 puts "\n"
-train_1 = CargoTrain.new(88)
-train_2 = PassangerTrain.new(8811)
+#
 
 # train_1.type
 # train_1.speed
@@ -37,10 +76,10 @@ train_2 = PassangerTrain.new(8811)
 # train_1.add_wagon_cargo
 # train_1.list_wagon
 
-train_2.speed_up
-train_2.type
-train_2.add_wagon_cargo
-train_2.add_wagon_passanger
+# train_2.speed_up
+# train_2.type
+# train_2.add_wagon_cargo
+# train_2.add_wagon_passanger
 
 
 
