@@ -23,35 +23,18 @@
 # Перемещаться между станциями, указанными в маршруте.
 # Показывать предыдущую станцию, текущую, следующую, на основе маршрута
 
-def more_zero?(speed)
-  if speed > 0
-    true
-  else
-    false
-  end
-end
 
-def count_hash_dublicate(hash, value)
-  count = 0
-  hash.values.each do |t|
-    if t == value
-      count += 1
-    end
-  end
-  return count
-end
 
 class Train
 
 	attr_accessor :speed, :wagon, :type, :route, :station
 
-	def initialize(type, number)
-    if type == 1
+	def initialize(number, type)
+    if type == :freight
 			@type = "freight"
 		else
 			@type = "passenger"
 		end
-
 		@number = number
     @train = {number => @type}
 		@speed = 0
@@ -69,33 +52,33 @@ class Train
 
 	def speed_up
 		@speed += 20
-		if @speed.zero?
+		if speed_zero?
 			puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
-		else more_zero?(@speed)
+		else
 			puts "Поезд №#{@number} ускорился на 20 км/ч, теперь его скорость составляет #{@speed}"
 		end
 	end
 
 	def stop
-		if more_zero?(@speed)
-			@speed = 0
-			puts "Поезд №#{@number} остановлен"
-		else
+		if speed_zero?
 			puts "Поезд №#{@number} уже стоит"
+		else
+      @speed = 0
+      puts "Поезд №#{@number} остановлен"
 		end
 	end
 
 	def add_wagon
-		if @speed.zero?
+		if speed_zero?
 			@wagon += 1
 			puts "Поезду №#{@number} добавлен новый вагон, теперь у него вагонов #{@wagon} шт."
 		else
-			puts "Сначала остановите поезд"
+			puts "Сначала остановите поезд, для того что бы добавить к нему вагон"
 		end
 	end
 
 	def delete_wagon
-		if @speed.zero?
+		if speed_zero?
 			@wagon -= 1
 			puts "От поезда №#{@number} отцеплен вагон"
 		else
@@ -121,10 +104,29 @@ class Train
     return {@number => @type}
   end
 
+private
+
+  def speed_zero?
+    @speed.zero?
+  end
+
+  # def speed_more_zero?
+  #   @speed > 0
+  # end
+
+  def count_hash_dublicate(hash, value)
+    count = 0
+    hash.values.each do |t|
+      if t == value
+        count += 1
+      end
+    end
+    return count
+  end
 end
 
 class RailwayStation
-	def initialize(name)
+  def initialize(name)
 		@name = name
 		@trains = {}
 		puts "Станция #{@name} создана"
