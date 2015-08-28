@@ -24,17 +24,25 @@ puts "\n"
 # RailwayStation.all
 
 train_1 = TrainCargo.new(88)
-# train_1.name_company
+train_2 = TrainCargo.new(88444)
+train_1.name_company
 # train_1.name_company_set("RJD")
-# train_1.name_company
+train_1.name_company = "RJD"
+#
+#
+train_1.name_company
 
 # wagon_1 = Wagon.new(66, :daffasdf)
 # wagon_1.name_company_set("RJD")
 # wagon_1.name_company
 
-Train.find(88)
+# a =
+# a.type
+# train_1.type
 
-Train.find(8811111)
+Train.find(88).name_company
+
+# Train.find(88444)
 
 
 

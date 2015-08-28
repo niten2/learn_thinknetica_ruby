@@ -2,7 +2,7 @@ class Train
   include Company
 	attr_accessor :speed, :wagon, :type, :route, :station
 
-  @@tain_list = []
+  @@tain_list = {}
 
 	def initialize(number, type)
     @type = type
@@ -10,15 +10,17 @@ class Train
 		@speed = 0
 		@wagon = []
 
-    # @@tain_list =
+    @@tain_list[number] = self
 		puts "Собран новый поезд №#{@number}, типа #{@type}"
 	end
 
   def self.find(number)
-
+    if @@tain_list[number].nil?
+      puts "Такой обьект не найден, возвращаю nil"
+    else
+      @@tain_list[number]
+    end
   end
-
-
 
 	def type
 		puts "Поезд №#{@number} типа #{@type}"
