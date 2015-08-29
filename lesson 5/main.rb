@@ -1,4 +1,6 @@
 require_relative "./company.rb"
+require_relative "InstanceCounter.rb"
+
 
 require_relative "./train.rb"
 require_relative "./train_cargo.rb"
@@ -12,25 +14,45 @@ require_relative "./wagon_cargo.rb"
 require_relative "./wagon_passenger.rb"
 
 
+station_1 = RailwayStation.new("Moscow")
+station_2 = RailwayStation.new("Krasnoyarsk")
+
+# возвращает кол-во экземпляров данного класса
+# RailwayStation.instances
+station_1.instances
+# RailwayStation.first_meth
+# station_1.list_type
+
+
+# puts RailwayStation.class_variables
 
 
 
-puts "\n"
-puts "****************" + " " + "СОЗДАНИЕ" + " " + "****************"
-puts "\n"
+# station_1.instances
+# RailwayStation.instances
+
+
+# который увеличивает счетчик кол-ва экземпляров класса и который можно вызвать из конструктора. При этом, данный метод не должен быть публичным.
+
+# RailwayStation.register_instance
+
+
+
+
+# puts "\n"
+# puts "****************" + " " + "СОЗДАНИЕ" + " " + "****************"
+# puts "\n"
 
 # station_1 = RailwayStation.new("Moscow")
 # station_2 = RailwayStation.new("Krasnoyarsk")
 # RailwayStation.all
 
-train_1 = TrainCargo.new(88)
-train_2 = TrainCargo.new(88444)
-train_1.name_company
+# train_1 = TrainCargo.new(88)
+# train_2 = TrainCargo.new(88444)
+# train_1.name_company
 # train_1.name_company_set("RJD")
-train_1.name_company = "RJD"
-#
-#
-train_1.name_company
+# train_1.name_company = "RJD"
+# train_1.name_company
 
 # wagon_1 = Wagon.new(66, :daffasdf)
 # wagon_1.name_company_set("RJD")
@@ -40,14 +62,8 @@ train_1.name_company
 # a.type
 # train_1.type
 
-Train.find(88).name_company
-
+# Train.find(88).name_company
 # Train.find(88444)
-
-
-
-
-
 
 # wagon_1 = WagonCargo.new(1)
 # wagon_2 = WagonCargo.new(2)
@@ -100,9 +116,9 @@ Train.find(88).name_company
 
 
 
-puts "\n"
-puts "****************" + " " + "ПОЕЗДА" + " " + "****************"
-puts "\n"
+# puts "\n"
+# puts "****************" + " " + "ПОЕЗДА" + " " + "****************"
+# puts "\n"
 #
 
 # train_1.type

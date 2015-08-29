@@ -1,7 +1,14 @@
 class RailwayStation
+
+  # extend InstanceCounter
+  include InstanceCounter
+  # @@count21 = 4
+
   @@all_station = []
 
   def initialize(name)
+    super
+
 		@name = name
     @@all_station << name
     @trains = {}
