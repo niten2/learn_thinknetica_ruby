@@ -50,10 +50,11 @@ RailwayStation.instances
 # station_2 = RailwayStation.new("Krasnoyarsk")
 # RailwayStation.all
 
-# train_1 = TrainPassenger.new(88)
-# train_2 = TrainCargo.new(88444)
-# train_2 = Train.new(88444)
-# Train.instances
+train_1 = TrainPassenger.new(88)
+train_2 = TrainCargo.new(88444)
+train_2 = Train.new(88444,  :dsafsdf)
+Train.instances
+TrainCargo.instances
 
 # train_1.name_company
 # train_1.name_company_set("RJD")

@@ -1,11 +1,11 @@
 class Train
   include Company
-  # include InstanceCounter
+  include InstanceCounter
 	attr_accessor :speed, :wagon, :type, :route, :station
   @@tain_list = {}
 
 	def initialize(number, type)
-    # register_instance
+    register_instance
     @type = type
     @number = number
 		@speed = 0
