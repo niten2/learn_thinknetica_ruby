@@ -1,5 +1,5 @@
 require_relative "./company.rb"
-require_relative "InstanceCounter.rb"
+require_relative "./InstanceCounter.rb"
 
 
 require_relative "./train.rb"
@@ -17,9 +17,12 @@ require_relative "./wagon_passenger.rb"
 station_1 = RailwayStation.new("Moscow")
 station_2 = RailwayStation.new("Krasnoyarsk")
 
+RailwayStation.instances
+
+
 # возвращает кол-во экземпляров данного класса
-# RailwayStation.instances
-station_1.instances
+
+# station_1.instances
 # RailwayStation.first_meth
 # station_1.list_type
 
@@ -47,8 +50,11 @@ station_1.instances
 # station_2 = RailwayStation.new("Krasnoyarsk")
 # RailwayStation.all
 
-# train_1 = TrainCargo.new(88)
+# train_1 = TrainPassenger.new(88)
 # train_2 = TrainCargo.new(88444)
+# train_2 = Train.new(88444)
+# Train.instances
+
 # train_1.name_company
 # train_1.name_company_set("RJD")
 # train_1.name_company = "RJD"

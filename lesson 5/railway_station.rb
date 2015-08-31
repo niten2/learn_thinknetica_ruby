@@ -1,18 +1,17 @@
 class RailwayStation
 
-  # extend InstanceCounter
   include InstanceCounter
-  # @@count21 = 4
 
   @@all_station = []
 
   def initialize(name)
-    super
+    register_instance
 
 		@name = name
     @@all_station << name
     @trains = {}
 		puts "Станция #{@name} создана"
+
 	end
 
   def self.all
