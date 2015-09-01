@@ -14,9 +14,41 @@ require_relative "./wagon_cargo.rb"
 require_relative "./wagon_passenger.rb"
 
 
-# station_1 = RailwayStation.new("Moscow")
+
+# station_1 = RailwayStation.new("Krsfsfsdf")
+# station_2 = RailwayStation.new("Moscowsdfsf")
+# station_3 = RailwayStation.new("Moscow111")
+
+# route_1 = Route.new(["Moscow", "Kazan", "Omsk", "Krasnoyarsk"])
+# route_2 = Route.new(["Krsfsfsdf", "Moscowsdfsf", "Moscow111"])
+
+
+# p RailwayStation.all
+# p Route.valid_station
+
+# train_1 = Train.new("dsd44", :passenger)
+# train_2 = Train.new("<dsd44></dsd44>", :passenger)
+
+# train_1.speed_up
+
+# wagon_1 = Wagon.new(66, :cargo)
+# wagon_2 = Wagon.new(0, :passenger)
+
+# train_1.add_wagon(wagon_1)
+# train_1.add_wagon(wagon_2)
+
+# train_2 = Train.new("dssdfsdfd44", :passenger)
+# train_3 = Train.new("dsd44", :passengerdsfasdf)
+
+
+
+
+
+
+
 # station_2 = RailwayStation.new("Krasnoyarsk")
-# station_3 = RailwayStation.new("Kr")
+# p station_3.valid?
+
 
 
 
@@ -28,7 +60,7 @@ require_relative "./wagon_passenger.rb"
 # train_1 = TrainPassenger.new(88)
 # train_2 = TrainCargo.new(88444)
 # train_1 = Train.new(88, :passenger)
-train_2 = Train.new(88, :cargo)
+
 # train_3 = Train.new(88, :sdfasfasdf)
 # Train.instances
 # TrainCargo.instances
@@ -72,9 +104,11 @@ train_2 = Train.new(88, :cargo)
 # train_1.name_company = "RJD"
 # train_1.name_company
 
-# wagon_1 = Wagon.new(66, :daffasdf)
+
 # wagon_1.name_company_set("RJD")
 # wagon_1.name_company
+
+
 
 # a =
 # a.type
@@ -130,6 +164,13 @@ train_2 = Train.new(88, :cargo)
 
 
 # route_1 = Route.new(["Moscow", "Kazan", "Omsk", "Krasnoyarsk"])
+# route_2 = Route.new(["Moscow"])
+
+# p route_1.valid?
+
+
+
+# route_1 = Route.new
 # route_2 = Route.new(["Novosibirsk", "Krasnoyarsk", "Irkutsk"])
 
 

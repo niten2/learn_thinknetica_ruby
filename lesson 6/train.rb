@@ -3,23 +3,25 @@ class Train
   include InstanceCounter
 	attr_accessor :speed, :wagon, :type, :route, :station, :number
 
-  # NUMBER_FORMAT =
+  NUMBER_FORMAT = /^(\w|\d){3}-*(\w|\d){2}$/
 
   @@tain_list = {}
 
 	def initialize(number, type)
     register_instance
+
     @type = type
     @number = number
-		@speed = 0
-		@wagon = []
-    @@tain_list[number] = self
-		validate!
-    puts "Собран новый поезд №#{@number}, типа #{@type}"
 
-    unless type != :cargo || type != :passenger
-      puts "dsfasdfsdf"
+    validate_number!
+    # validate!
+    if self.valid?
+      puts "Собран новый поезд №#{@number}, типа #{@type}"
+      @speed = 0
+      @wagon = []
+      @@tain_list[number] = self
     end
+
 
 	end
 
@@ -31,9 +33,13 @@ class Train
     end
   end
 
-	def type
-		puts "Поезд №#{@number} типа #{@type}"
-	end
+	# def type_train
+	# 	puts "Поезд №#{@number} типа #{@type}"
+	# end
+
+  def type
+    @type
+  end
 
 	def speed
 		puts "Поезд №#{@number} имеет скорость #{@speed} км/ч"
@@ -59,13 +65,13 @@ class Train
 
 
   def add_wagon(wagon)
-    if wagon_such_train?(wagon) && speed_zero?
-      @wagon << wagon.list
-      puts "К грузовому поезду №#{@number} добавлен грузовой вагон №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."
-    elsif !wagon_such_train?(wagon) && !speed_zero?
-      puts "Сначала остановите поезд, для того что бы добавить к нему вагон"
-    elsif !wagon_such_train?(wagon)
-      puts "Вы не можете присоединить этот вагон к этому поезду"
+    unless wagon_such_train?(wagon)
+      if !speed_zero?
+        puts "Сначала остановите поезд, для того что бы добавить к нему вагон"
+      else
+        @wagon << wagon.list
+        puts "К грузовому поезду №#{@number} добавлен грузовой вагон №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."
+      end
     end
   end
 
@@ -103,7 +109,11 @@ class Train
     return {@number => @type}
   end
 
-
+  def valid?
+    validate!
+  rescue
+    false
+  end
 
 
 private
@@ -122,14 +132,25 @@ private
     return count
   end
 
-  def wagon_such_train?
+  def wagon_such_train?(wagon)
+    raise "Wagon type not suitable Train type" if wagon.type == self.type
+    true
+    rescue
+      puts "Этот вагон не подходит к этому поезду"
   end
+
 
   def validate!
     raise "Number can't be nil" if number.nil?
-    # raise "Number has invalid format" if number !~ NUMBER_FORMAT
-    raise "Type should be cargo or passenger" if type != :cargo && type != :passenger
+    raise "Number has invalid format" if number !~ NUMBER_FORMAT
+    raise "Type should be cargo or passenger" unless type == :cargo || type == :passenger
     true
+  rescue
+    puts "Поезд не создан, Поезд должен иметь номер типа xxx-xx или xxxxx и быть типа cargo или passenger"
+  end
+
+  def validate_number!
+    raise "Number can not be the same" unless @@tain_list[number].nil?
   end
 
 end

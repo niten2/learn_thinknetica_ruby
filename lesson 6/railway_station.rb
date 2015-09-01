@@ -9,16 +9,22 @@ class RailwayStation
     register_instance
 
 		@name = name
-    @@all_station << name
-    @trains = {}
-		puts "Станция #{@name} создана"
-    validate!
+
+    if self.valid?
+      puts "Станция #{@name} cоздана"
+      @@all_station << name
+      @trains = {}
+    end
 
 	end
 
   def self.all
-    puts "На данный момент существуют следующие станции #{@@all_station}"
+    @@all_station
+    # puts "На данный момент существуют следующие станции #{@@all_station}"
   end
+
+
+
 
 	def list
 		puts "На станции сейчас #{@trains.length} поездов"
@@ -32,13 +38,13 @@ class RailwayStation
 	def take_train(train = {})
     @number = train.keys.join
     @type   = train.values.join
-		if @number.nil? || @type.nil?
-			puts "Невозможно принять такой поезд"
-		else
+		# if @number.nil? || @type.nil?
+			# puts "Невозможно принять такой поезд"
+		# else
 			# @trains << {@number => @type}
       @trains[@number] = @type
 			puts "Поезд с номером #{@number} и типом #{@type} принят на станцию"
-		end
+		# end
 	end
 
 	def send_train(train = {})
@@ -62,7 +68,13 @@ class RailwayStation
 
   def validate!
     raise "Number can't be nil"                 if name.nil?
-    raise "Number should be at least 6 symbols" if name.length < 6
+    raise "Number should be at least 3 symbols" if name.length < 3
     true
+    rescue
+    puts "Станция #{@name} НЕ создана, Станция должна иметь имя и быть больше 3 символов"
   end
+
+  # end
 end
+
+
