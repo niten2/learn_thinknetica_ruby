@@ -26,7 +26,8 @@ require_relative "./wagon_passenger.rb"
 # p RailwayStation.all
 # p Route.valid_station
 
-# train_1 = Train.new("dsd44", :passenger)
+train_1 = Train.new("dsd44", :passenger)
+train_1 = Train.new("dsd44", :passenger)
 # train_2 = Train.new("<dsd44></dsd44>", :passenger)
 
 # train_1.speed_up

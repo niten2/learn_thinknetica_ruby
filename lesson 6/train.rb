@@ -13,7 +13,7 @@ class Train
     @type = type
     @number = number
 
-    validate_number!
+    # validate_number!
     # validate!
     if self.valid?
       puts "Собран новый поезд №#{@number}, типа #{@type}"
@@ -144,14 +144,17 @@ private
     raise "Number can't be nil" if number.nil?
     raise "Number has invalid format" if number !~ NUMBER_FORMAT
     raise "Type should be cargo or passenger" unless type == :cargo || type == :passenger
+    raise "Number can not be the same" unless @@tain_list[number].nil?
     true
   rescue
-    puts "Поезд не создан, Поезд должен иметь номер типа xxx-xx или xxxxx и быть типа cargo или passenger"
+    puts "Поезд не создан,\n - поезд должен иметь номер типа xxx-xx или xxxxx, \n - такой номер не должен существовать, \n - проезд должен быть типа cargo или passenger."
   end
 
-  def validate_number!
-    raise "Number can not be the same" unless @@tain_list[number].nil?
-  end
+  # def validate_number!
+  #   raise "Number can not be the same" unless @@tain_list[number].nil?
+  # rescue
+  #     puts "Поезд не создан, т.к. такой номер уже существует"
+  # end
 
 end
 
