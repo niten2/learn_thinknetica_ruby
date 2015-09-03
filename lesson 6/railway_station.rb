@@ -7,15 +7,15 @@ class RailwayStation
 
   def initialize(name)
     register_instance
-
 		@name = name
+    validate!
+    @@all_station << name
+    @trains = {}
 
     if self.valid?
       puts "Станция #{@name} cоздана"
-      @@all_station << name
-      @trains = {}
     end
-
+    p @@all_station
 	end
 
   def self.all
@@ -60,8 +60,8 @@ class RailwayStation
 
   def valid?
     validate!
-  rescue
-    false
+    rescue
+      false
   end
 
   private
@@ -71,7 +71,7 @@ class RailwayStation
     raise "Number should be at least 3 symbols" if name.length < 3
     true
     rescue
-    puts "Станция #{@name} НЕ создана, Станция должна иметь имя и быть больше 3 символов"
+      puts "Станция #{@name} НЕ создана, Станция должна иметь имя и быть больше 3 символов"
   end
 
   # end
