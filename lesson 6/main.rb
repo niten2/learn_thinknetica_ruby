@@ -14,23 +14,27 @@ require_relative "./wagon_cargo.rb"
 require_relative "./wagon_passenger.rb"
 
 
+# station_2 = RailwayStation.new("Moscow")
+# station_1 = RailwayStation.new("Kazan")
+# station_1 = RailwayStation.new("Omsk")
 
-station_1 = RailwayStation.new("Krsfsfsdf")
-p RailwayStation.all
-station_2 = RailwayStation.new("Mo")
-p RailwayStation.all
+# p RailwayStation.all
+
+# p RailwayStation.all
+
+
 # station_3 = RailwayStation.new("Moscow111")
 
-# route_1 = Route.new(["Moscow", "Kazan", "Omsk", "Krasnoyarsk"])
-# route_2 = Route.new(["Krsfsfsdf", "Moscowsdfsf", "Moscow111"])
+# route_1 = Route.new(["Moscow", "Kazan", "Omsk"])
+# route_2 = Route.new(["Moscow" ])
 
 
 # p RailwayStation.all
 # p Route.valid_station
 
 # train_1 = Train.new("dsd44", :passenger)
-# train_1 = Train.new("dsd44", :passenger)
-# train_2 = Train.new("<dsd44></dsd44>", :passenger)
+# train_1 = Train.new("dsd42", :passenger)
+# train_2 = Train.new("33333", :passenger)
 
 # train_1.speed_up
 
@@ -120,7 +124,7 @@ p RailwayStation.all
 # Train.find(88).name_company
 # Train.find(88444)
 
-# wagon_1 = WagonCargo.new(1)
+# wagon_1 = Wagon.new(1, :sdafsdfasf)
 # wagon_2 = WagonCargo.new(2)
 # wagon_3 = WagonPassenger.new(22)
 

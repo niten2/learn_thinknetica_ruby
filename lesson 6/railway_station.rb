@@ -1,8 +1,6 @@
 class RailwayStation
-
   include InstanceCounter
   attr_accessor :name
-
   @@all_station = []
 
   def initialize(name)
@@ -11,20 +9,12 @@ class RailwayStation
     validate!
     @@all_station << name
     @trains = {}
-
-    if self.valid?
-      puts "Станция #{@name} cоздана"
-    end
-    p @@all_station
+    message_created
 	end
 
   def self.all
     @@all_station
-    # puts "На данный момент существуют следующие станции #{@@all_station}"
   end
-
-
-
 
 	def list
 		puts "На станции сейчас #{@trains.length} поездов"
@@ -64,17 +54,18 @@ class RailwayStation
       false
   end
 
-  private
+private
 
   def validate!
     raise "Number can't be nil"                 if name.nil?
     raise "Number should be at least 3 symbols" if name.length < 3
     true
-    rescue
-      puts "Станция #{@name} НЕ создана, Станция должна иметь имя и быть больше 3 символов"
   end
 
-  # end
+  def message_created
+    puts "Станция #{@name} cоздана"
+  end
+
 end
 
 

@@ -2,27 +2,18 @@ class Train
   include Company
   include InstanceCounter
 	attr_accessor :speed, :wagon, :type, :route, :station, :number
-
   NUMBER_FORMAT = /^(\w|\d){3}-*(\w|\d){2}$/
-
   @@tain_list = {}
 
 	def initialize(number, type)
     register_instance
-
     @type = type
     @number = number
-
-    # validate_number!
-    # validate!
-    if self.valid?
-      puts "Собран новый поезд №#{@number}, типа #{@type}"
-      @speed = 0
-      @wagon = []
-      @@tain_list[number] = self
-    end
-
-
+    validate!
+    message_created
+    @speed = 0
+    @wagon = []
+    @@tain_list[number] = self
 	end
 
   def self.find(number)
@@ -32,10 +23,6 @@ class Train
       @@tain_list[number]
     end
   end
-
-	# def type_train
-	# 	puts "Поезд №#{@number} типа #{@type}"
-	# end
 
   def type
     @type
@@ -63,7 +50,6 @@ class Train
 		end
 	end
 
-
   def add_wagon(wagon)
     unless wagon_such_train?(wagon)
       if !speed_zero?
@@ -75,11 +61,9 @@ class Train
     end
   end
 
-
   def list_wagon
     puts "У поезда сейчас вагонов #{@wagon.size} шт."
     puts "К поезду присоединены вагоны под номерами #{@wagon}"
-
   end
 
 	def delete_wagon
@@ -115,7 +99,6 @@ class Train
     false
   end
 
-
 private
 
   def speed_zero?
@@ -139,22 +122,17 @@ private
       puts "Этот вагон не подходит к этому поезду"
   end
 
-
   def validate!
     raise "Number can't be nil" if number.nil?
     raise "Number has invalid format" if number !~ NUMBER_FORMAT
     raise "Type should be cargo or passenger" unless type == :cargo || type == :passenger
     raise "Number can not be the same" unless @@tain_list[number].nil?
     true
-  rescue
-    puts "Поезд не создан,\n - поезд должен иметь номер типа xxx-xx или xxxxx, \n - такой номер не должен существовать, \n - проезд должен быть типа cargo или passenger."
   end
 
-  # def validate_number!
-  #   raise "Number can not be the same" unless @@tain_list[number].nil?
-  # rescue
-  #     puts "Поезд не создан, т.к. такой номер уже существует"
-  # end
+  def message_created
+    puts "Собран новый поезд №#{@number}, типа #{@type}"
+  end
 
 end
 

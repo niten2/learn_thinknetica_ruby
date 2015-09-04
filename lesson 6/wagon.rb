@@ -4,18 +4,11 @@ class Wagon
   def initialize(number, type)
     @number = number
     @type = type
-
-    # validate!
-    if self.valid?
-      puts "Создан вагон №#{@number} типа #{@type}"
-    end
-
-
-
+    validate!
+    message_created
   end
 
   def type
-    # puts "Этот вагон №#{@number} типа #{@type}"
     @type
   end
 
@@ -34,10 +27,10 @@ private
     raise "Number can't be nil" if @number.nil?
     raise "Type should be cargo or passenger" unless @type == :cargo || @type == :passenger
     true
-  rescue
-    puts "Вагон не создан, Вагон должен иметь номер и быть типа cargo или passenger"
   end
 
-
+  def message_created
+    puts "Создан вагон №#{@number} типа #{@type}"
+  end
 
 end

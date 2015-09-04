@@ -2,11 +2,8 @@ class Route
 
   def initialize(stations = [])
     @stations = stations
-    # validate!
-    if self.valid?
-      puts "Маршрут от #{@stations.first} до #{@stations.last} создан"
-    end
-
+    validate!
+    message_created
   end
 
 	def add(station)
@@ -41,13 +38,14 @@ private
     raise "Stations should be more 2" if @stations.size <= 2
     raise "Stations incorrect"        if !all_station_include_station?
     true
-  rescue
-    puts "Маршрут НЕ создан, Маршрут должен иметь больше 2 станций, также маршрут должен включать в себя настоящие станции"
   end
 
   def all_station_include_station?
     (@stations - RailwayStation.all).empty?
   end
 
+  def message_created
+    puts "Маршрут от #{@stations.first} до #{@stations.last} создан"
+  end
 end
 
