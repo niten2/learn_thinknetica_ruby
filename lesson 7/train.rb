@@ -28,6 +28,10 @@ class Train
     @type
   end
 
+  def number
+    @number
+  end
+
 	def speed
 		puts "Поезд №#{@number} имеет скорость #{@speed} км/ч"
 	end
@@ -100,10 +104,8 @@ class Train
   end
 
   def each_wagon(&block)
-    @wagon.each {|t| yield(t)}
-
-
-    # @wagon.each {|wagon| block(wagon)}
+    @wagon.each {|wagon| yield(wagon)}
+    # @wagon.each {|wagon| block(wagon).call}?? not work
   end
 
 

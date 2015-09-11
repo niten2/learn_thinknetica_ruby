@@ -13,39 +13,78 @@ require_relative "./wagon.rb"
 require_relative "./wagon_cargo.rb"
 require_relative "./wagon_passenger.rb"
 
-# -------------------
-# train_1 = Train.new("dsd41", :passenger)
-# train_2 = Train.new("dsd42", :passenger)
-# train_3 = Train.new("dsd43", :passenger)
+# ------------------- operation_of_each_train
+train_1 = Train.new("dsd41", :passenger)
+train_2 = Train.new("dsd42", :passenger)
+train_3 = Train.new("dsd43", :passenger)
 
-# station_1 = RailwayStation.new("Omsk")
+station_1 = RailwayStation.new("Omsk")
 
-# station_1.take_train(train_1.list)
-# station_1.take_train(train_2.list)
-# station_1.take_train(train_3.list)
+station_1.take_train(train_1)
+station_1.take_train(train_2)
+station_1.take_train(train_3)
+station_1.send_train(train_3)
 
-# station_1.list_type
+station_1.list_type
 
-# station_1.operation_of_each_train do |trains|
+station_1.each_train {|train| puts train.type}
+
+# station_1.each_train do |trains|
 #   trains.each do |train_key, train_value|
 #     puts "Train.number = #{train_key}, Train.type = #{train_value}"
 #   end
 # end
+
+
 # -------------------
 
 
-train_1 = TrainCargo.new("dsd41")
-wagon_1 = Wagon.new(66, :cargo)
-wagon_2 = Wagon.new(67, :cargo)
-wagon_3 = Wagon.new(68, :cargo)
 
-train_1.add_wagon(wagon_1)
-train_1.add_wagon(wagon_2)
-train_1.add_wagon(wagon_3)
+# # --------------- each_wagon
+# train_1 = TrainCargo.new("dsd41")
+# wagon_1 = Wagon.new(66, :cargo)
+# wagon_2 = Wagon.new(67, :cargo)
+# wagon_3 = Wagon.new(68, :cargo)
 
-train_1.list_wagon
+# train_1.add_wagon(wagon_1)
+# train_1.add_wagon(wagon_2)
+# train_1.add_wagon(wagon_3)
 
-train_1.each_wagon {|wagon| puts "Это вагон #{wagon.list}"}
+# train_1.list_wagon
+
+# train_1.each_wagon {|wagon| puts "Это вагон #{wagon.list}"}
+# # ---------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
