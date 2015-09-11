@@ -104,8 +104,8 @@ class Train
   end
 
   def each_wagon(&block)
-    @wagon.each {|wagon| yield(wagon)}
-    # @wagon.each {|wagon| block(wagon).call}?? not work
+    # @wagon.each {|wagon| yield(wagon)}
+    @wagon.each {|wagon| block.call(wagon)}
   end
 
 
