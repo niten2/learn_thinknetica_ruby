@@ -114,6 +114,7 @@ private
     @speed.zero?
   end
 
+
   def count_hash_dublicate(hash, value)
     count = 0
     hash.values.each do |t|
