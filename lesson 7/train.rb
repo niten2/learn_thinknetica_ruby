@@ -1,11 +1,11 @@
 class Train
   include Company
   include InstanceCounter
-	attr_accessor :speed, :wagon, :type, :route, :station, :number
+  attr_accessor :speed, :wagon, :type, :route, :station, :number
   NUMBER_FORMAT = /^(\w|\d){3}-*(\w|\d){2}$/
   @@tain_list = {}
 
-	def initialize(number, type)
+  def initialize(number, type)
     register_instance
     @type = type
     @number = number
@@ -14,87 +14,80 @@ class Train
     @speed = 0
     @wagon = []
     @@tain_list[number] = self
-	end
+  end
 
   def self.find(number)
     if @@tain_list[number].nil?
-      puts "Такой обьект не найден, возвращаю nil"
+      puts 'Такой обьект не найден, возвращаю nil'
     else
       @@tain_list[number]
     end
   end
 
-  def type
-    @type
+  def speed
+    puts "Поезд №#{@number} имеет скорость #{@speed} км/ч"
   end
 
-  def number
-    @number
+  def speed_up
+    @speed += 20
+    if speed_zero?
+      puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
+    else
+      puts "Поезд №#{@number} ускорился на 20 км/ч, теперь его скорость составляет #{@speed}"
+    end
   end
 
-	def speed
-		puts "Поезд №#{@number} имеет скорость #{@speed} км/ч"
-	end
-
-	def speed_up
-		@speed += 20
-		if speed_zero?
-			puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
-		else
-			puts "Поезд №#{@number} ускорился на 20 км/ч, теперь его скорость составляет #{@speed}"
-		end
-	end
-
-	def stop
-		if speed_zero?
-			puts "Поезд №#{@number} уже стоит"
-		else
+  def stop
+    if speed_zero?
+      puts "Поезд №#{@number} уже стоит"
+    else
       @speed = 0
       puts "Поезд №#{@number} остановлен"
-		end
-	end
+    end
+  end
 
   def add_wagon(wagon)
     unless wagon_such_train?(wagon)
       if !speed_zero?
-        puts "Сначала остановите поезд, для того что бы добавить к нему вагон"
+        puts 'Сначала остановите поезд, для того что бы добавить к нему вагон'
       else
         @wagon << wagon
-        puts "К грузовому поезду №#{@number} добавлен грузовой вагон №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."
+        puts "К грузовому поезду №#{@number} добавлен грузовой вагон
+        №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."
       end
     end
   end
 
   def list_wagon
     puts "У поезда сейчас вагонов #{@wagon.size} шт."
-    # puts "К поезду присоединены вагоны под номерами #{self.each_wagon {|wagon| puts wagon.list}}"
   end
 
-	def delete_wagon
-		if speed_zero?
-			@wagon.pop
-			puts "От поезда №#{@number} отцеплен вагон"
-		else
-			puts "Сначала остановите поезд"
-		end
-	end
+  def delete_wagon
+    if speed_zero?
+      @wagon.pop
+      puts "От поезда №#{@number} отцеплен вагон"
+    else
+      puts 'Сначала остановите поезд'
+    end
+  end
 
-	def take_route(station)
-		@station = station
-    puts "Поезд №#{@number} готов ехать с станции #{@station.first} на станцию #{@station.last}"
-	end
+  def take_route(station)
+    @station = station
+    puts "Поезд №#{@number} готов ехать с станции #{@station.first}
+    на станцию #{@station.last}"
+  end
 
   def move(station)
     if @route.include?(station)
       @station = station
       puts "Поезд №#{@number} приехал на с станцию #{@station}"
     else
-      puts "Такой станции нет в маршруте"
+      puts 'Такой станции нет в маршруте'
     end
   end
 
   def list
-    return {@number => @type}
+    { @number => @type }
   end
 
   def valid?
@@ -104,47 +97,39 @@ class Train
   end
 
   def each_wagon(&block)
-    # @wagon.each {|wagon| yield(wagon)}
-    @wagon.each {|wagon| block.call(wagon)}
+    @wagon.each { |wagon| block.call(wagon) }
   end
 
-
-
-private
+  private
 
   def speed_zero?
     @speed.zero?
   end
 
-
   def count_hash_dublicate(hash, value)
     count = 0
     hash.values.each do |t|
-      if t == value
-        count += 1
-      end
+      count += 1 if t == value
     end
-    return count
+    count
   end
 
   def wagon_such_train?(wagon)
-    raise "Wagon type not suitable Train type" if wagon.type == self.type
+    fail 'Wagon type not suitable Train type' if wagon.type == type
     true
-    rescue
-      puts "Этот вагон не подходит к этому поезду"
+  rescue
+    puts 'Этот вагон не подходит к этому поезду'
   end
 
   def validate!
-    raise "Number can't be nil" if number.nil?
-    raise "Number has invalid format" if number !~ NUMBER_FORMAT
-    raise "Type should be cargo or passenger" unless type == :cargo || type == :passenger
-    raise "Number can not be the same" unless @@tain_list[number].nil?
+    fail "Number can't be nil" if number.nil?
+    fail 'Number has invalid format' if number !~ NUMBER_FORMAT
+    fail 'Type should be cargo or passenger' unless type == :cargo || type == :passenger
+    fail 'Number can not be the same' unless @@tain_list[number].nil?
     true
   end
 
   def message_created
     puts "Собран новый поезд №#{@number}, типа #{@type}"
   end
-
 end
-

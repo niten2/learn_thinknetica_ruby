@@ -3,10 +3,9 @@ module Company
 
   def name_company
     if @name_company.nil?
-      puts "У этот обьект никто не произвел"
+      puts 'У этот обьект никто не произвел'
     else
       puts "Производитель этого обьекта #{@name_company}"
     end
   end
-
 end

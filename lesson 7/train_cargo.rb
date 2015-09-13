@@ -1,14 +1,11 @@
 class TrainCargo < Train
-
   def initialize(number, type = :cargo)
     super
   end
 
-private
+  private
 
   def wagon_such_train?(wagon)
     wagon.class == WagonCargo
   end
-
 end
-

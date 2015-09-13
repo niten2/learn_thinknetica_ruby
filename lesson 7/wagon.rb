@@ -8,12 +8,10 @@ class Wagon
     message_created
   end
 
-  def type
-    @type
-  end
+  attr_reader :type
 
   def list
-    return @number
+    @number
   end
 
   def valid?
@@ -22,15 +20,15 @@ class Wagon
     false
   end
 
-private
+  private
+
   def validate!
-    raise "Number can't be nil" if @number.nil?
-    raise "Type should be cargo or passenger" unless @type == :cargo || @type == :passenger
+    fail "Number can't be nil" if @number.nil?
+    fail 'Type should be cargo or passenger' unless @type == :cargo || @type == :passenger
     true
   end
 
   def message_created
     puts "Создан вагон №#{@number} типа #{@type}"
   end
-
 end
