@@ -24,11 +24,16 @@ class Wagon
 
   def validate!
     fail "Number can't be nil" if @number.nil?
-    fail 'Type should be cargo or passenger' unless @type == :cargo || @type == :passenger
+    fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
     true
   end
 
   def message_created
     puts "Создан вагон №#{@number} типа #{@type}"
   end
+
+  def type_not_cargo_or_passenger
+    @type == :cargo || @type == :passenger
+  end
+
 end

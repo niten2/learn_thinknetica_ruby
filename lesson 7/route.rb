@@ -21,7 +21,7 @@ class Route
 
   def list
     puts "Маршрут от #{@stations.first} до #{@stations.last}"
-    @stations.each_with_index { |station, index| puts "#{index + 1}. #{station}" }
+    @stations.each_with_index { |station, i| puts "#{i + 1}. #{station}" }
   end
 
   def valid?

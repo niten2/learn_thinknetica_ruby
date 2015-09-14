@@ -48,7 +48,6 @@ require_relative './wagon_passenger.rb'
 
 # train_1.list_wagon
 
-# train_1.each_wagon { |wagon| puts "Это вагон #{wagon.list}" }
 # ---------------
 
 # station_2 = RailwayStation.new("Moscow")
@@ -200,7 +199,6 @@ require_relative './wagon_passenger.rb'
 # train_1.delete_wagon
 # train_1.take_route(route_1.list)
 
-# puts "СТАНЦИИ"
 # station_1.list
 # station_1.list_type
 

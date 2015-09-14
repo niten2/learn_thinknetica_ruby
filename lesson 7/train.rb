@@ -33,7 +33,8 @@ class Train
     if speed_zero?
       puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
     else
-      puts "Поезд №#{@number} ускорился на 20 км/ч, теперь его скорость составляет #{@speed}"
+      puts "Поезд №#{@number} ускорился на 20 км/ч,"
+      puts "теперь его скорость составляет #{@speed}"
     end
   end
 
@@ -124,7 +125,7 @@ class Train
   def validate!
     fail "Number can't be nil" if number.nil?
     fail 'Number has invalid format' if number !~ NUMBER_FORMAT
-    fail 'Type should be cargo or passenger' unless type == :cargo || type == :passenger
+    fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
     fail 'Number can not be the same' unless @@tain_list[number].nil?
     true
   end
@@ -132,4 +133,9 @@ class Train
   def message_created
     puts "Собран новый поезд №#{@number}, типа #{@type}"
   end
+
+  def type_not_cargo_or_passenger
+    @type == :cargo || @type == :passenger
+  end
+
 end
