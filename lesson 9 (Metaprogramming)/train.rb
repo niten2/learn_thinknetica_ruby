@@ -5,8 +5,8 @@ class Train
   include InstanceCounter
   attr_accessor :speed, :wagon, :type, :route, :station, :number
 
-  attr_accessor_with_history :xxx
-  # @@xxxyyy
+  attr_accessor_with_history :xxx, :yyy
+  strong_attr_accessor(:strong_attr, String)
 
   NUMBER_FORMAT = /^(\w|\d){3}-*(\w|\d){2}$/
   @@tain_list = {}
@@ -15,7 +15,10 @@ class Train
     register_instance
     @type = type
     @number = number
-    validate!
+    # validate!
+    self.validate name = number, type_validation = "presence"
+# self.validate name = number, type = :presence)
+
     message_created
     @speed = 0
     @wagon = []
@@ -128,13 +131,13 @@ class Train
     puts 'Этот вагон не подходит к этому поезду'
   end
 
-  def validate!
-    fail "Number can't be nil" if number.nil?
-    fail 'Number has invalid format' if number !~ NUMBER_FORMAT
-    fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
-    fail 'Number can not be the same' unless @@tain_list[number].nil?
-    true
-  end
+  # def validate!
+  #   fail "Number can't be nil" if number.nil?
+  #   fail 'Number has invalid format' if number !~ NUMBER_FORMAT
+  #   fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
+  #   fail 'Number can not be the same' unless @@tain_list[number].nil?
+  #   true
+  # end
 
   def message_created
     puts "Собран новый поезд №#{@number}, типа #{@type}"

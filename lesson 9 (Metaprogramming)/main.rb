@@ -14,6 +14,37 @@ require_relative './wagon.rb'
 require_relative './wagon_cargo.rb'
 require_relative './wagon_passenger.rb'
 
+# ----------------attr_accessor_with_history
+# train_1 = Train.new("dsd41", :passenger)
+
+# train_1.xxx = 0
+# p "instance_variables Train_1 = #{train_1.instance_variables}"
+
+# train_1.xxx = 55
+# p "xxx = #{train_1.xxx}"
+# train_1.xxx = 1
+# p "xxx = #{train_1.xxx}"
+# train_1.xxx = 7000
+# p "xxx = #{train_1.xxx}"
+
+# p train_1.xxx_history
+# ---------------------------
+
+# ----------------- strong_attr_accessor
+# train_1.strong_attr = "afsdfasdf"
+# p train_1.strong_attr
+# train_1.strong_attr = 56546456
+# -----------------
+
+
+# ------------ validate
+train_1 = Train.new("dsd41", :passenger)
+# train_1.validate
+
+
+
+
+
 # Train.attr_accessor_with_history :xxx
 # # Train.strong_attr_accessor
 # Train.xxx
@@ -22,14 +53,19 @@ require_relative './wagon_passenger.rb'
 
 # Train.attr_accessor_with_history :@@xxx, 435345
 
-Train.xxx
+
+# p "instans_variables = #{Train.instans_variables}"
+# p "массив всех переменных = #{Train.xxx_history}"
+
+
+
 # p Train.class_variable_get :@@xxx
 
 # Train.class_variable_set :@@xxx, 45345
 
 
 
-p Train.class_variables
+
 
 # Train.strong_attr_accessor
 
