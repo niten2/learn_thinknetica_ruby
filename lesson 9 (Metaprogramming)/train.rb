@@ -16,7 +16,16 @@ class Train
     @type = type
     @number = number
     # validate!
-    self.validate name = number, type_validation = "presence"
+    validate number, :presence
+
+    validate number, :format, NUMBER_FORMAT
+
+
+    # validate :station, :type, RailwayStation
+
+
+
+    # validate name: number, type_validation: "presence"
 # self.validate name = number, type = :presence)
 
     message_created

@@ -38,8 +38,36 @@ require_relative './wagon_passenger.rb'
 
 
 # ------------ validate
-train_1 = Train.new("dsd41", :passenger)
+# train_1 = Train.new("dsdsdfsdf41", :passenger)
+train_1 = Train.new("dsd-41", :passenger)
+# train_1 = Train.new("", :passenger)
 # train_1.validate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
