@@ -1,12 +1,19 @@
 class RailwayStation
+  include Validation
   include InstanceCounter
   attr_accessor :name
   @@all_station = []
 
+  validate :name,       :presence
+  validate :type_class, :type,    "RailwayStation"
+
   def initialize(name)
     register_instance
     @name = name
+    @type_class = self.class
+
     validate!
+
     @@all_station << name
     @trains = []
     message_created
@@ -58,12 +65,6 @@ class RailwayStation
 
   private
 
-  def validate!
-    fail "Number can't be nil" if name.nil?
-    fail 'Number should be at least 3 symbols' if name.length < 3
-    true
-  end
-
   def message_created
     puts "Станция #{@name} cоздана"
   end
@@ -74,3 +75,9 @@ class RailwayStation
     count
   end
 end
+
+  # def validate!
+  #   fail "Number can't be nil" if name.nil?
+  #   fail 'Number should be at least 3 symbols' if name.length < 3
+  #   true
+  # end

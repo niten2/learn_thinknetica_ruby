@@ -1,63 +1,47 @@
 module Validation
-
-  # def validate(options = {})
-  def validate(name, *args)
-
-    @name = name
-    @args = args
-
-    # p @name
-    # p @args
-
-    if @args[0] == :presence
-      fail "Name can't be nil or \'\'" if name.nil? || name == ""
-    end
-
-    if @args[0] == :format
-      fail 'Number has invalid format' if number !~ @args[1]
-    end
-
-    if @args[0] == :format
-      fail 'Number has invalid format' if number !~ @args[1]
-    end
-
-
-
-  # def validate!
-  #   fail "Number can't be nil" if number.nil?
-  #   fail 'Number has invalid format' if number !~ NUMBER_FORMAT
-  #   fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
-  #   fail 'Number can not be the same' unless @@tain_list[number].nil?
-  #   true
-  # end
-
-
-    # p "#{option} DSFASDFSAFSDF"
-    # p type
-
-
-    # if type == :presence
-    #   if name == "" || name == nil
-    #     raise "Input correcte NAME"
-    #   end
-
-    # # elsif  format
-
-
-    # # elsif      type
-
-    # else
-    #   raise "Input correct Type Validation"
-    # end
-
-
-
+  def self.included(base)
+    base.extend ClassMethods
+    base.send :include, InstanceMethods
   end
 
-  def validate!
+  module ClassMethods
+    def validate(name, *args)
+      validates_name = '@validates'
+      instance_variable_set(validates_name, {}) unless instance_variable_defined?(validates_name)
+      instance_variable_get(validates_name)[name] = *args
+    end
   end
 
-  def valid?
-  end
+  module InstanceMethods
 
+    def validate!
+      self.class.instance_variable_get('@validates').each do |name, args|
+        send("validate_#{args[0]}", name, *args[1, args.size])
+      end
+      true
+    end
+
+    def valid?
+      validate!
+    rescue ArgumentError
+      false
+    end
+
+    private
+
+    def validate_presence(name)
+      value = instance_variable_get("@#{name}")
+      fail 'Argument is empty string' if value.nil? || value.empty?
+    end
+
+    def validate_format(name, format, message='Invalid format')
+      value = instance_variable_get("@#{name}")
+      fail ArgumentError, message unless value =~ format
+    end
+
+    def validate_type(name, type, message='Invalid type')
+      type_class = instance_variable_get("@#{name}").to_s
+      fail ArgumentError, message if type_class != type
+    end
+  end
 end

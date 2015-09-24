@@ -3,7 +3,7 @@ class Train
   include Company
   include Validation
   include InstanceCounter
-  attr_accessor :speed, :wagon, :type, :route, :station, :number
+  attr_accessor :speed, :wagon, :type, :route, :station, :name, :type_class
 
   attr_accessor_with_history :xxx, :yyy
   strong_attr_accessor(:strong_attr, String)
@@ -11,57 +11,52 @@ class Train
   NUMBER_FORMAT = /^(\w|\d){3}-*(\w|\d){2}$/
   @@tain_list = {}
 
-  def initialize(number, type)
+  validate :name,       :presence
+  validate :name,       :format,  NUMBER_FORMAT
+  validate :type_class, :type,    "Train"
+
+  def initialize(name, type)
     register_instance
+    @name = name
     @type = type
-    @number = number
-    # validate!
-    validate number, :presence
+    @type_class = self.class
 
-    validate number, :format, NUMBER_FORMAT
-
-
-    # validate :station, :type, RailwayStation
-
-
-
-    # validate name: number, type_validation: "presence"
-# self.validate name = number, type = :presence)
+    validate!
 
     message_created
     @speed = 0
     @wagon = []
-    @@tain_list[number] = self
+    @@tain_list[name] = self
   end
 
-  def self.find(number)
-    if @@tain_list[number].nil?
+  def self.find(name)
+    if @@tain_list[name].nil?
       puts 'Такой обьект не найден, возвращаю nil'
     else
-      @@tain_list[number]
+      @@tain_list[name]
     end
   end
 
   def speed
-    puts "Поезд №#{@number} имеет скорость #{@speed} км/ч"
+    puts "Поезд №#{@name} имеет скорость #{@speed} км/ч"
   end
 
   def speed_up
     @speed += 20
     if speed_zero?
-      puts "Поезд №#{@number} сдвинулся с места и поехал со скоростью 20 км/ч"
+      puts "Поезд №#{@name} сдвинулся с места и поехал со скоростью 20 км/ч"
     else
-      puts "Поезд №#{@number} ускорился на 20 км/ч,"
+      puts "Поезд №#{@name} ускорился на 20 км/ч,"
       puts "теперь его скорость составляет #{@speed}"
     end
   end
 
   def stop
     if speed_zero?
-      puts "Поезд №#{@number} уже стоит"
+      puts "Поезд №#{@name} уже стоит"
     else
       @speed = 0
-      puts "Поезд №#{@number} остановлен"
+      puts "Поезд №#{@name} остановлен"
     end
   end
 
@@ -71,7 +66,7 @@ class Train
         puts 'Сначала остановите поезд, для того что бы добавить к нему вагон'
       else
         @wagon << wagon
-        puts "К грузовому поезду №#{@number} добавлен грузовой вагон
+        puts "К грузовому поезду №#{@name} добавлен грузовой вагон
         №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."
       end
     end
@@ -84,7 +79,7 @@ class Train
   def delete_wagon
     if speed_zero?
       @wagon.pop
-      puts "От поезда №#{@number} отцеплен вагон"
+      puts "От поезда №#{@name} отцеплен вагон"
     else
       puts 'Сначала остановите поезд'
     end
@@ -92,21 +87,21 @@ class Train
 
   def take_route(station)
     @station = station
-    puts "Поезд №#{@number} готов ехать с станции #{@station.first}
+    puts "Поезд №#{@name} готов ехать с станции #{@station.first}
     на станцию #{@station.last}"
   end
 
   def move(station)
     if @route.include?(station)
       @station = station
-      puts "Поезд №#{@number} приехал на с станцию #{@station}"
+      puts "Поезд №#{@name} приехал на с станцию #{@station}"
     else
       puts 'Такой станции нет в маршруте'
     end
   end
 
   def list
-    { @number => @type }
+    { @name => @type }
   end
 
   def valid?
@@ -140,16 +135,8 @@ class Train
     puts 'Этот вагон не подходит к этому поезду'
   end
 
-  # def validate!
-  #   fail "Number can't be nil" if number.nil?
-  #   fail 'Number has invalid format' if number !~ NUMBER_FORMAT
-  #   fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
-  #   fail 'Number can not be the same' unless @@tain_list[number].nil?
-  #   true
-  # end
-
   def message_created
-    puts "Собран новый поезд №#{@number}, типа #{@type}"
+    puts "Собран новый поезд №#{@name}, типа #{@type}"
   end
 
   def type_not_cargo_or_passenger
@@ -157,3 +144,12 @@ class Train
   end
 
 end
+
+
+# def validate!
+  #   fail "Number can't be nil" if number.nil?
+  #   fail 'Number has invalid format' if number !~ NUMBER_FORMAT
+  #   fail 'Type should be cargo or passenger' unless type_not_cargo_or_passenger
+  #   fail 'Number can not be the same' unless @@tain_list[number].nil?
+  #   true
+  # end

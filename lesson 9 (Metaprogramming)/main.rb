@@ -14,6 +14,30 @@ require_relative './wagon.rb'
 require_relative './wagon_cargo.rb'
 require_relative './wagon_passenger.rb'
 
+
+train_1 = Train.new("sdddf", :passenger)
+station_1 = RailwayStation.new("Moscow")
+station_1 = RailwayStation.new("Kazan")
+station_1 = RailwayStation.new("Omsk")
+route_1 = Route.new(["Moscow", "Kazan", "Omsks"])
+wagon_1 = Wagon.new("sdfsdf", :cargo)
+
+
+
+
+
+
+
+
+
+# station_1.take_train(train_1)
+
+# train_1.validate!
+# p Train.class_variables
+# p Train.val
+
+
+
 # ----------------attr_accessor_with_history
 # train_1 = Train.new("dsd41", :passenger)
 
@@ -39,11 +63,9 @@ require_relative './wagon_passenger.rb'
 
 # ------------ validate
 # train_1 = Train.new("dsdsdfsdf41", :passenger)
-train_1 = Train.new("dsd-41", :passenger)
-# train_1 = Train.new("", :passenger)
+# train_1 = Train.new("dsd-41", :passenger)
+# # train_1 = Train.new("", :passenger)
 # train_1.validate
-
-
 
 
 
