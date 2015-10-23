@@ -1,0 +1,2 @@
+class Players < Gambler
+end
